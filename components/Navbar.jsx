@@ -1,8 +1,22 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useRef, useEffect } from "react";
 
 export default function Navbar() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isSearchOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
   return (
-    <nav className="w-full bg-white border-b border-gray-100 flex items-center justify-between px-8 py-4">
+    <header className="relative w-full bg-white border-b border-gray-100 z-50">
+      <nav className="flex items-center justify-between px-6 md:px-8 py-4">
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/" className="flex items-baseline">
@@ -24,7 +38,7 @@ export default function Navbar() {
       </div>
 
       {/* Nav Links */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
         <Link
           href="/products"
           className="text-[15px] font-medium text-black hover:text-gray-600 transition flex items-center gap-1.5"
@@ -79,22 +93,44 @@ export default function Navbar() {
 
       {/* Actions */}
       <div className="flex items-center gap-6">
-        <button className="text-black hover:text-gray-600 transition">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <div 
+          className={`flex items-center h-10 transition-all duration-300 ease-in-out overflow-hidden ${
+            isSearchOpen 
+              ? "bg-gray-100 rounded-full px-4 gap-2 w-56 md:w-48 lg:w-52" 
+              : "bg-transparent rounded-none px-0 gap-0 w-8 justify-center"
+          }`}
+        >
+          <button 
+            className="text-black hover:text-gray-600 transition shrink-0 flex items-center justify-center w-8 h-8"
+            onClick={() => setIsSearchOpen(true)}
           >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-        <button className="text-black hover:text-gray-600 transition relative">
+            <svg
+              width={isSearchOpen ? "18" : "20"}
+              height={isSearchOpen ? "18" : "20"}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={isSearchOpen ? "text-gray-400" : ""}
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          
+          <input 
+            ref={inputRef}
+            type="text" 
+            placeholder="Search Products" 
+            className={`bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-400 transition-all duration-300 ${
+              isSearchOpen ? "w-full opacity-100" : "w-0 opacity-0"
+            }`}
+            onBlur={() => setIsSearchOpen(false)}
+          />
+        </div>
+        <button className={`text-black hover:text-gray-600 transition relative ${isSearchOpen ? 'hidden md:block' : 'block'}`}>
           <svg
             width="20"
             height="20"
@@ -113,7 +149,7 @@ export default function Navbar() {
         </button>
         <Link
           href="/products"
-          className="bg-[var(--color-primary)] text-black font-semibold px-5 py-2.5 rounded-full hover:brightness-95 transition flex items-center gap-2 text-sm"
+          className="hidden md:flex bg-[var(--color-primary)] text-black font-semibold px-5 py-2.5 rounded-full hover:brightness-95 transition items-center gap-2 text-sm"
         >
           Juice Up
           <svg
@@ -130,7 +166,63 @@ export default function Navbar() {
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </Link>
+        
+        {/* Mobile Hamburger Button */}
+        <button 
+          className={`${isSearchOpen ? 'hidden' : 'flex'} md:hidden text-black hover:text-gray-600 transition`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {isMobileMenuOpen ? (
+              <>
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </>
+            )}
+          </svg>
+        </button>
       </div>
     </nav>
+
+    {/* Mobile Menu Dropdown */}
+    {isMobileMenuOpen && (
+      <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 flex flex-col px-6 py-6 gap-6 shadow-sm z-40">
+        <Link href="/products" className="text-[15px] font-medium text-black flex items-center justify-between" onClick={() => setIsMobileMenuOpen(false)}>
+          Products
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </Link>
+        <Link href="/stores" className="text-[15px] font-medium text-black" onClick={() => setIsMobileMenuOpen(false)}>
+          Stores
+        </Link>
+        <Link href="/categories" className="text-[15px] font-medium text-black" onClick={() => setIsMobileMenuOpen(false)}>
+          Categories
+        </Link>
+        <Link href="/brands" className="text-[15px] font-medium text-black flex items-center justify-between" onClick={() => setIsMobileMenuOpen(false)}>
+          Brands
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </Link>
+        
+        <div className="pt-4 border-t border-gray-100">
+          <Link
+            href="/products"
+            className="bg-[var(--color-primary)] text-black font-semibold px-5 py-3 rounded-full flex items-center justify-center gap-2 text-sm w-full"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Juice Up
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </Link>
+        </div>
+      </div>
+    )}
+    </header>
   );
 }
