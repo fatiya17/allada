@@ -23,9 +23,11 @@ export default function ProductsLayout({ products, categories, brands }) {
     maxPrice: ""
   });
 
-  // singkronkan kategori dan pencarian jika url berubah
-  // karena filter lokal (merek, kondisi, dll) tidak disimpan di url,
-  // maka kita harus reset filter lokal tersebut saat terjadi navigasi.
+  /**
+   * Menyelaraskan status pencarian dan kategori dengan parameter URL saat ini.
+   * Filter lokal tambahan (seperti merek, kondisi, dan harga) direset secara otomatis 
+   * setiap kali terjadi navigasi untuk mencegah ketidaksinkronan status antarmuka.
+   */
   useEffect(() => {
     const cat = searchParams.get("category") || "";
     const search = searchParams.get("search") || "";
