@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Hero() {
+export default function Hero({ stats }) {
   return (
     <section className="w-full px-4 md:px-8 py-6">
       <div className="w-full rounded-[30px] md:rounded-[40px] bg-gradient-to-br from-[var(--color-hero-start)] from-10% to-[var(--color-hero-end)] to-90% p-6 md:p-8 lg:p-10 flex flex-row relative overflow-hidden min-h-[200px]">
@@ -32,7 +32,7 @@ export default function Hero() {
           
           {/* Top Right: Brand Placeholder */}
           <div className="flex flex-col items-center">
-            <span className="font-serif font-bold text-[10px] sm:text-lg md:text-2xl tracking-tighter text-[var(--color-header-text)] leading-none">alldae.</span>
+            <span className="font-serif font-bold text-[10px] sm:text-lg md:text-2xl tracking-tighter text-[var(--color-header-text)] leading-none">allada.</span>
             <span className="text-[5px] sm:text-[8px] md:text-[10px] font-bold tracking-[0.2em] text-[var(--color-header-text)]/70 mt-0.5 md:mt-1">POWERED BY</span>
           </div>
 
@@ -40,8 +40,8 @@ export default function Hero() {
           <div className="text-right flex flex-col items-end">
             <div className="text-[6px] sm:text-xs md:text-base font-bold text-[var(--color-header-text)]/80 uppercase tracking-widest mb-[-2px] md:mb-[-5px]">Up to</div>
             <div className="font-serif text-[24px] sm:text-[45px] md:text-[67px] lg:text-[75px] font-bold text-[var(--color-header-text)] leading-none">50%</div>
-            <div className="text-[8px] sm:text-xs md:text-sm font-semibold text-[var(--color-header-text)]/90 mt-0.5 md:mt-2 max-w-[150px] md:ml-auto leading-tight">
-              Discount on selected categories
+            <div className="text-[8px] sm:text-xs md:text-sm font-semibold text-[var(--color-header-text)]/90 mt-0.5 md:mt-2 max-w-[150px] md:ml-auto leading-tight text-right">
+              Explore {stats?.totalProducts || 0} products from {stats?.totalStores || 0} official stores.
             </div>
           </div>
           
