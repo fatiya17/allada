@@ -1,16 +1,21 @@
 "use client";
 
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 export default function ProductCard({ product }) {
   const formattedPrice = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(product.price);
 
   return (
-    <div className="relative w-full bg-white rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100 group cursor-pointer hover:shadow-md transition-all flex flex-col">
+    <Link 
+      href={`/product/${product.slug}`}
+      className="relative w-full bg-white rounded-3xl shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100 group cursor-pointer hover:shadow-md transition-all flex flex-col"
+    >
       
       {/* Discount Ribbon (Wraps around the card) */}
       {product.discountPercentage > 0 && (
@@ -78,6 +83,6 @@ export default function ProductCard({ product }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
