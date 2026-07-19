@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function StoreCard({ store }) {
   return (
     <div className="bg-white rounded-[24px] shadow-sm border border-gray-100 p-2 flex flex-col h-full hover:shadow-md transition-shadow">
-      {/* Banner */}
+      {/* spanduk */}
       <div className="w-full h-20 sm:h-24 rounded-2xl relative overflow-hidden bg-gray-100">
         <img 
           src="/banner-stores.webp" 
@@ -16,7 +16,7 @@ export default function StoreCard({ store }) {
       </div>
 
       <div className="px-3 pb-3 flex flex-col flex-1">
-        {/* Avatar */}
+        {/* profil avatar */}
         <div className="mt-[-28px]">
           <div className="w-14 h-14 rounded-full border-[3px] border-white overflow-hidden bg-white shadow-sm inline-block relative">
             <img 
@@ -27,7 +27,7 @@ export default function StoreCard({ store }) {
           </div>
         </div>
 
-        {/* Title and Bookmark */}
+        {/* judul dan simpan */}
         <div className="mt-1.5 flex justify-between items-start gap-3">
           <div>
             <h3 className="text-[14px] sm:text-[15px] font-bold text-gray-900 leading-tight line-clamp-1">{store.name}</h3>
@@ -38,7 +38,7 @@ export default function StoreCard({ store }) {
           </button>
         </div>
 
-        {/* Tags */}
+        {/* kategori tag */}
         <div className="flex flex-wrap gap-1.5 items-center mt-2.5">
           {store.isOfficial && (
             <span className="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-blue-100">
@@ -51,7 +51,7 @@ export default function StoreCard({ store }) {
           </span>
         </div>
 
-        {/* Stats Row */}
+        {/* baris statistik */}
         <div className="grid grid-cols-3 gap-0 border-t border-b border-gray-100 py-2 my-3 text-center">
           <div className="border-r border-gray-100 flex flex-col items-center justify-center">
             <div className="flex items-center gap-0.5 font-extrabold text-[12px] sm:text-[13px] text-gray-900">
@@ -70,7 +70,7 @@ export default function StoreCard({ store }) {
           </div>
         </div>
 
-        {/* Action Button */}
+        {/* tombol aksi */}
         <Link href={`/stores/${store.slug}`} className="block mt-auto">
           <button className="w-full bg-black text-white font-bold rounded-xl py-2 text-[12px] sm:text-[13px] hover:bg-gray-800 transition-colors">
             Visit Store
