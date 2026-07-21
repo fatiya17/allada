@@ -1,5 +1,5 @@
 import ProductDetail from "@/components/ProductDetail";
-import { getProduct } from "@/lib/api";
+import { getProduct, getStoreProducts } from "@/lib/api";
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
@@ -12,6 +12,10 @@ export default async function ProductPage({ params }) {
       </main>
     );
   }
+
+  // Sinkronisasi data jumlah produk toko dari API
+  const storeProducts = await getStoreProducts(product.store.id);
+  product.store.productCount = storeProducts.length;
 
   return (
     <main className="flex-1 bg-white">
