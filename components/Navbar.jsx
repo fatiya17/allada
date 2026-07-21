@@ -65,6 +65,7 @@ export default function Navbar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-400 w-full"
+            suppressHydrationWarning
           />
         </form>
       </div>
@@ -100,6 +101,7 @@ export default function Navbar() {
               // jeda sebentar agar tombol submit bisa diklik
               setTimeout(() => setIsSearchOpen(false), 200);
             }}
+            suppressHydrationWarning
           />
         </form>
         <Link href="/cart" className={`text-black hover:text-gray-600 transition relative ${isSearchOpen ? 'hidden md:block' : 'block'}`}>
