@@ -1,27 +1,23 @@
+import { Suspense } from "react";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
-import ProductCard from "@/components/ProductCard";
-import { getProducts, getStats, getCategories } from "@/lib/api";
+import ProductList from "@/components/ProductList";
+import { getStats, getCategories } from "@/lib/api";
 
 export default async function Home({ searchParams }) {
   const resolvedParams = await searchParams || {};
   const category = resolvedParams.category;
 
-  const [allProducts, stats, categoriesData] = await Promise.all([
-    getProducts(),
+  const [stats, categoriesData] = await Promise.all([
     getStats(),
     getCategories()
   ]);
 
-  let displayProducts = [];
   let sectionTitle = "Featured Products";
 
   if (category) {
     const selectedCat = categoriesData.find(c => c.slug === category);
     sectionTitle = selectedCat ? `${selectedCat.name} Products` : "Products";
-    displayProducts = allProducts.filter(p => p.category?.slug === category);
-  } else {
-    displayProducts = allProducts.filter(p => p.isFeatured);
   }
 
   return (
@@ -35,11 +31,17 @@ export default async function Home({ searchParams }) {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">{sectionTitle}</h2>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          {displayProducts.map((prod) => (
-            <ProductCard key={prod.id} product={prod} />
-          ))}
-        </div>
+        <Suspense 
+          key={category} 
+          fallback={
+            <div className="w-full py-20 flex flex-col items-center justify-center gap-4">
+              <div className="w-10 h-10 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-gray-500 font-medium text-sm">Memuat produk...</p>
+            </div>
+          }
+        >
+          <ProductList category={category} />
+        </Suspense>
       </section>
     </main>
   );
