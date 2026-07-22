@@ -1,6 +1,6 @@
 import LoadingComponent from "@/components/Loading";
 
 export default function Loading() {
-  return <LoadingComponent message="Memuat produk..." minHeight="50vh" />;
+  return <LoadingComponent message="Memuat data..." minHeight="70vh" />;
 }
 
