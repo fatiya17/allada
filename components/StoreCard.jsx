@@ -72,7 +72,7 @@ export default function StoreCard({ store }) {
 
         {/* tombol aksi */}
         <Link href={`/stores/${store.slug}`} className="block mt-auto">
-          <button className="w-full bg-black text-white font-bold rounded-xl py-2 text-[12px] sm:text-[13px] hover:bg-gray-800 transition-colors">
+          <button className="w-full bg-black text-white font-bold rounded-xl py-2 text-[12px] sm:text-[13px] hover:bg-gray-800 cursor-pointer transition-colors">
             Visit Store
           </button>
         </Link>
