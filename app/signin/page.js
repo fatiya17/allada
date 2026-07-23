@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Sparkle, Eye, EyeOff, Mail, Lock, ArrowRight, ArrowLeft, Apple } from "lucide-react";
+import { Sparkle, Eye, EyeOff, Mail, Lock, ArrowRight, Apple } from "lucide-react";
 
-export default function SignUpPage() {
+export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,15 +18,11 @@ export default function SignUpPage() {
       setError("Please fill in all fields.");
       return;
     }
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
-      return;
-    }
 
     setLoading(true);
     setError("");
     
-    // Simulate API registration call
+    // Simulate API sign in call
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
@@ -47,10 +43,10 @@ export default function SignUpPage() {
             
             <div className="mb-6">
               <h1 className="text-[32px] md:text-[38px] font-sans font-bold text-[var(--color-header-text)] leading-tight mb-1 tracking-tight">
-                Create account
+                Welcome back
               </h1>
               <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
-                Join us to find the freshest organic products and support local stores. Get started for free.
+                Sign in to your account to browse fresh products, access your cart, and support local organic stores.
               </p>
             </div>
 
@@ -61,7 +57,7 @@ export default function SignUpPage() {
               </div>
             )}
 
-            {/* Signup Form */}
+            {/* Signin Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Email Input */}
@@ -95,6 +91,16 @@ export default function SignUpPage() {
                 </button>
               </div>
 
+              {/* Forgot Password Link */}
+              <div className="flex justify-end pt-1">
+                <Link
+                  href="/signup/coming-soon"
+                  className="text-xs font-semibold text-emerald-800 hover:text-emerald-950 hover:underline transition-colors"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+
               {/* Submit Button */}
               <button
                 type="submit"
@@ -104,24 +110,24 @@ export default function SignUpPage() {
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
-                  <span>Create account</span>
+                  <span>Sign in</span>
                 )}
               </button>
 
               {/* Divider */}
               <div className="flex items-center py-2">
                 <div className="flex-grow border-t border-gray-200"></div>
-                <span className="flex-shrink mx-3 text-[11px] text-gray-400 font-medium">or sign up with</span>
+                <span className="flex-shrink mx-3 text-[11px] text-gray-400 font-medium">or sign in with</span>
                 <div className="flex-grow border-t border-gray-200"></div>
               </div>
 
-              {/* Social Sign Up - Circular Black Icons */}
+              {/* Social Sign In - Circular Black Icons */}
               <div className="flex items-center justify-center gap-3">
                 {/* Google */}
                 <button
                   type="button"
                   className="w-10 h-10 bg-black text-white hover:bg-gray-800 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm group cursor-pointer"
-                  title="Sign up with Google"
+                  title="Sign in with Google"
                 >
                   <svg className="w-5 h-5 group-hover:scale-110 transition-transform fill-current" viewBox="0 0 24 24">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="currentColor" />
@@ -135,7 +141,7 @@ export default function SignUpPage() {
                 <button
                   type="button"
                   className="w-10 h-10 bg-black text-white hover:bg-gray-800 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm group cursor-pointer"
-                  title="Sign up with Apple"
+                  title="Sign in with Apple"
                 >
                   <Apple className="w-5 h-5 group-hover:scale-110 transition-transform fill-white text-white" />
                 </button>
@@ -144,7 +150,7 @@ export default function SignUpPage() {
                 <button
                   type="button"
                   className="w-10 h-10 bg-black text-white hover:bg-gray-800 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm group cursor-pointer"
-                  title="Sign up with Facebook"
+                  title="Sign in with Facebook"
                 >
                   <svg className="w-5 h-5 group-hover:scale-110 transition-transform fill-current" viewBox="0 0 24 24">
                     <path d="M9 8H7v3h2v9h4v-9h3.6l.4-3H13V6c0-.5.5-1 1-1h2V2h-3a5 5 0 0 0-5 5v1z" fill="currentColor" />
@@ -159,9 +165,9 @@ export default function SignUpPage() {
           {/* Footer Navigation */}
           <div className="text-center lg:text-left mt-4 pt-3 border-t border-gray-100">
             <span className="text-xs text-gray-500">
-              Already a member?{" "}
-              <Link href="/signin" className="font-semibold text-emerald-800 hover:text-emerald-950 hover:underline transition-colors">
-                Log in
+              New to Allada?{" "}
+              <Link href="/signup" className="font-semibold text-emerald-800 hover:text-emerald-950 hover:underline transition-colors">
+                Sign up
               </Link>
             </span>
           </div>
@@ -250,7 +256,7 @@ export default function SignUpPage() {
 
             </svg>
 
-            {/* Floating Canva Design-style Badge (Customized for Allada) */}
+            {/* Floating Canva Design-style Badge */}
             <div className="absolute bottom-6 left-4 bg-white border border-gray-150 p-3.5 rounded-2xl shadow-lg flex flex-col gap-1.5 max-w-[155px] select-none hover:-translate-y-1 transition-transform duration-300">
               <span className="text-[12px] font-bold text-gray-900 leading-tight">Allada Organic</span>
               <span className="text-[9px] text-gray-400 font-semibold mb-0.5">100+ Local Stores</span>
@@ -273,16 +279,16 @@ export default function SignUpPage() {
           {/* Bottom Content Area */}
           <div className="w-full text-center mt-4">
             
-            {/* Carousel Dots */}
+            {/* Carousel Dots - Active first dot */}
             <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
-              <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
               <div className="w-4 h-1.5 rounded-full bg-black"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
             </div>
 
             {/* Title / Catchphrase */}
             <h3 className="text-lg font-serif font-bold text-[var(--color-header-text)] px-4 leading-snug">
-              Make your shopping healthy and sustainable with Allada
+              Welcome back! Enjoy the best organic food options delivered to you.
             </h3>
 
           </div>
@@ -302,9 +308,9 @@ export default function SignUpPage() {
               <img src="/check.svg" alt="Success Check" className="w-28 h-auto object-contain" />
             </div>
 
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Account Created!</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Welcome Back!</h3>
             <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-6">
-              We've sent a verification email to <span className="font-semibold text-gray-900">{email}</span>.
+              You have successfully signed in as <span className="font-semibold text-gray-900">{email}</span>.
             </p>
             
             <Link 
