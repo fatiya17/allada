@@ -61,6 +61,7 @@ We went with a clean, bright, and modern look. Here are the main colors we use:
 ### User Account
 * **Registration Form:** New users can create an account directly from the app using a clean registration form.
 * **Email Verification:** After signing up, users receive an email verification step to confirm their identity before accessing their account.
+* **Sign In with Verification:** Registered users can sign in to their account, with an email verification step to securely confirm their identity before gaining access.
 
 ## Data Source (API)
 
