@@ -58,6 +58,10 @@ We went with a clean, bright, and modern look. Here are the main colors we use:
 * **Cart Management:** Pick specific items to checkout, change quantities, and see the total price update instantly.
 * **API Ready:** Fetches live data safely. If the internet drops, the app won't easily crash.
 
+### User Account
+* **Registration Form:** New users can create an account directly from the app using a clean registration form.
+* **Email Verification:** After signing up, users receive an email verification step to confirm their identity before accessing their account.
+
 ## Data Source (API)
 
 This app gets its live products and store data from this REST API:
